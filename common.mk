@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This file includes all definitions that apply to ALL Amazon Kindle Fire devices, and
-# are also specific to otter devices
 #
 # Everything in this directory will become public
 
@@ -69,26 +67,21 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_CHARACTERISTICS := tablet
 
-# enable Google-specific location features,
-# like NetworkLocationProvider and LocationCollector
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.com.google.locationfeatures=1 \
-    ro.com.google.networklocation=1
-
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 # Rootfs
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel \
-    $(COMMON_FOLDER)/default.prop:/root/default.prop \
+    $(COMMON_FOLDER)/default.prop:/root/default.prop
+
+# BT
+$(call inherit-product, hardware/ti/wpan/ti-wpan-products.mk)
 
 # Wifi
 PRODUCT_PACKAGES += \
-    ti_wfd_libs \
     dhcpcd.conf \
     lib_driver_cmd_wl12xx \
-    TQS_D_1.7.ini \
     calibrator
 
 # Filesystem management tools
@@ -101,33 +94,26 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libaudioutils \
     Music \
-    tinyplay \
-    tinymix \
-    tinycap \
     audio_policy.default \
     audio.a2dp.default \
     audio.usb.default
 
 # DRM
 PRODUCT_PACKAGES += \
-    libwvm \
+    libwvm
 
 # Misc / Testing
 PRODUCT_PACKAGES += \
     evtest \
     strace \
     libjni_pinyinime \
-    sh \
+    sh
 
 # Extra apps (not always included by AOSP)
 PRODUCT_PACKAGES += \
-    Email \
+    Email
 
-PRODUCT_AAPT_PREF_CONFIG := hdpi
-# BT
-PRODUCT_PACKAGES += \
-    uim-sysfs \
-    libbt-vendor
+PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 # Prebuilts /system/etc
 PRODUCT_COPY_FILES += \
@@ -135,7 +121,7 @@ PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/prebuilt/etc/media_codecs.xml:/system/etc/media_codecs.xml \
     $(COMMON_FOLDER)/prebuilt/etc/media_profiles.xml:/system/etc/media_profiles.xml \
     $(COMMON_FOLDER)/prebuilt/etc/mixer_paths.xml:/system/etc/mixer_paths.xml \
-    $(COMMON_FOLDER)/prebuilt/etc/smc_normal_world_android_cfg.ini:/system/etc/smc_normal_world_android_cfg.ini \
+    $(COMMON_FOLDER)/prebuilt/etc/smc_normal_world_android_cfg.ini:/system/etc/smc_normal_world_android_cfg.ini
 
 # Input
 PRODUCT_COPY_FILES += \
@@ -143,9 +129,8 @@ PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/prebuilt/usr/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl\
     $(COMMON_FOLDER)/prebuilt/usr/keylayout/twl6030_pwrbutton.kl:system/usr/keylayout/twl6030_pwrbutton.kl
 
-
 # USB Host app switcher
-#PRODUCT_PACKAGES += USBHostSwitcher
+PRODUCT_PACKAGES += USBHostSwitcher
 
 # TI OMAP4
 PRODUCT_PACKAGES += \
@@ -171,7 +156,7 @@ PRODUCT_PACKAGES += \
 # Standard CM stuff.
 PRODUCT_PACKAGES += \
     hwprops \
-    CMStats \
+    CMStats
 
 # Hardware HALs
 PRODUCT_PACKAGES += \
@@ -184,8 +169,8 @@ PRODUCT_PACKAGES += \
 
 # Clears the boot counter, update mac address on first start
 PRODUCT_COPY_FILES += \
-        $(COMMON_FOLDER)/prebuilt/bin/clear_bootcnt.sh:/system/bin/clear_bootcnt.sh \
-	$(COMMON_FOLDER)/prebuilt/bin/fix-mac.sh:/system/bin/fix-mac.sh
+    $(COMMON_FOLDER)/prebuilt/bin/clear_bootcnt.sh:/system/bin/clear_bootcnt.sh \
+    $(COMMON_FOLDER)/prebuilt/bin/fix-mac.sh:/system/bin/fix-mac.sh
 
 # Art
 PRODUCT_COPY_FILES += \

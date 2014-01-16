@@ -60,7 +60,7 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 
 # Wifi
 USES_TI_MAC80211 := true
-WPA_SUPPLICANT_VERSION           := VER_0_8_X
+WPA_SUPPLICANT_VERSION           := VER_0_8_X_TI
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
 BOARD_HOSTAPD_DRIVER             := NL80211
@@ -71,6 +71,7 @@ WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wl12xx_sdio.ko"
 WIFI_DRIVER_MODULE_NAME          := "wl12xx_sdio"
 WIFI_FIRMWARE_LOADER             := ""
 PRODUCT_WIRELESS_TOOLS           := true
+BOARD_WIFI_SKIP_CAPABILITIES     := true
 COMMON_GLOBAL_CFLAGS		 += -DUSES_TI_MAC80211
 
 
